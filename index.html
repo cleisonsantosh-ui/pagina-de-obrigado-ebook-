@@ -200,13 +200,7 @@
     <script>
         function continuar() {
             // Dispara o evento de conversão do Facebook Pixel
-            fbq('track', 'CompleteRegistration', {
-                content_name: 'Pagina Obrigado',
-                status: 'completed'
-            });
-
-            // Alternativa: se quiser usar um evento personalizado
-            // fbq('trackCustom', 'BotaoContinuarClicado');
+            fbq('track', 'Purchase', {value: 0.00, currency: 'USD'});
             
             // Esconde a seção inicial e mostra a final
             document.getElementById('secao-inicial').style.display = 'none';
