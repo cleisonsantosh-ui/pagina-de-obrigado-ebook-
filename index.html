@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado!</title>
+    <!-- Pixel do Facebook -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        // Inicializa o pixel (substitua SEU_PIXEL_ID pelo seu ID real)
+        fbq('init', 'SEU_PIXEL_ID');
+        fbq('track', 'PageView');
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .imagem-fofa {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 30px;
+            display: block;
+            animation: scaleIn 0.5s ease-out 0.2s both;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+        }
+
+        .message {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .btn-continuar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .btn-continuar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-continuar:active {
+            transform: translateY(-1px);
+        }
+
+        .mensagem-final {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .mensagem-final h2 {
+            color: #11998e;
+            margin-bottom: 20px;
+        }
+
+        .mensagem-final p {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+        }
+
+        .mensagem-final .icon-fechar {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .fechar-btn {
+            background: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .fechar-btn:hover {
+            background: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Seção inicial com botão -->
+        <div id="secao-inicial">
+            <img src="imagem/transferir (10).jfif" alt="Obrigado" class="imagem-fofa">
+            <h1>Obrigado!</h1>
+            <p class="message">
+                Seu cadastro foi realizado com sucesso.<br>
+                Clique no botão abaixo para continuar.
+            </p>
+            <button class="btn-continuar" onclick="continuar()">
+                Continuar
+            </button>
+        </div>
+
+        <!-- Seção final (após clique) -->
+        <div id="secao-final" class="mensagem-final">
+            <div class="icon-fechar">✓</div>
+            <h2>Pronto!</h2>
+            <p>
+                Você já pode fechar esta janela.<br>
+                Agradecemos sua participação!
+            </p>
+            <button class="fechar-btn" onclick="fecharPagina()">
+                Fechar Página
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function continuar() {
+            // Dispara o evento de conversão do Facebook Pixel
+            fbq('track', 'CompleteRegistration', {
+                content_name: 'Pagina Obrigado',
+                status: 'completed'
+            });
+
+            // Alternativa: se quiser usar um evento personalizado
+            // fbq('trackCustom', 'BotaoContinuarClicado');
+            
+            // Esconde a seção inicial e mostra a final
+            document.getElementById('secao-inicial').style.display = 'none';
+            document.getElementById('secao-final').style.display = 'block';
+        }
+
+        function fecharPagina() {
+            // Fecha a janela (funciona se a página foi aberta via script)
+            window.close();
+            
+            // Mensagem alternativa se não conseguir fechar
+            alert('Você pode fechar esta janela agora.');
+        }
+    </script>
+</body>
+</html>
